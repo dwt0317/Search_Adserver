@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>SAD</display-name>
+  <welcome-file-list>
+    <welcome-file>/search/main.html</welcome-file>
+  </welcome-file-list>
+  
+  
+  <servlet>
+    <servlet-name>ESServlet</servlet-name>
+    <servlet-class>servlet.ESServlet</servlet-class>
+  </servlet>
+ 
+  <servlet>
+    <servlet-name>BingServlet</servlet-name>
+    <servlet-class>servlet.BingServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>AdServlet</servlet-name>
+    <servlet-class>servlet.AdServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>IDServlet</servlet-name>
+    <servlet-class>servlet.IDServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>ClickServlet</servlet-name>
+    <servlet-class>servlet.ClickServlet</servlet-class>
+  </servlet>
+  
+<listener>
+    <listener-class>
+        global.InitListener
+    </listener-class>
+</listener>
+  
+  
+  
+  <servlet-mapping>
+    <servlet-name>BingServlet</servlet-name>
+    <url-pattern>/BingServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ESServlet</servlet-name>
+    <url-pattern>/ESServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>AdServlet</servlet-name>
+    <url-pattern>/AdServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>IDServlet</servlet-name>
+    <url-pattern>/IDServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>ClickServlet</servlet-name>
+    <url-pattern>/ClickServlet</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

@@ -1,0 +1,10 @@
+{
+  "keywords": {
+    "properties": {
+      "keyword": {
+        "type": "string",
+        "index": "not_analyzed"
+      }
+    }
+  }
+}

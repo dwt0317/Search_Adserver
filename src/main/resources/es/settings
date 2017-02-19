@@ -1,0 +1,14 @@
+"settings": {
+      "analyzer": {
+        "ik_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "de_stopwords",
+            "de_stemmer"
+          ]
+        }
+      }
+    }
+  }

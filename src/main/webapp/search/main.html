@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Google Powered Site Search | Tutorialzine Demo</title>
+
+
+<script src="/DSearchEngine/search/js/jquery-3.1.0.min.js"></script>
+<script src="/DSearchEngine/search/js/jquery.cookie.js"></script>
+<script src="/DSearchEngine/search/js/main_script.js"></script>
+<link rel="stylesheet" type="text/css" href="/DSearchEngine/search/styles.css" />
+
+</head>
+
+<body>
+
+<div id="page">
+
+    <h1>Search Engine</h1>
+    
+    <form id="searchForm" method="post">
+		<fieldset>
+        
+           	<input id="q" type="text" />
+            
+            <input type="button" value="Submit" id="submitButton"/>
+            
+            <div id="searchInContainer">
+                <input type="radio" name="check" value="BingServlet" id="BingSearch" checked/>
+                <label for="Bing">Bing</label>
+            
+                <input type="radio" name="check" value="ESServlet" id="ESSearch"  />
+                <label for="ES" id="siteNameLabel">Local</label>
+                                         
+                
+			</div>
+            <!--             
+            <ul class="icons">
+                <li class="web" title="Web Search" data-searchType="web">Web</li>
+                <li class="images" title="Image Search" data-searchType="images">Images</li>
+                <li class="news" title="News Search" data-searchType="news">News</li>
+                <li class="videos" title="Video Search" data-searchType="video">Videos</li>
+            </ul>
+             --> 
+            
+        </fieldset>
+    </form>
+
+    <div id="resultsDiv"></div>
+    
+</div>
+
+<!-- It would be great if you leave the link back to the tutorial. Thanks! -->
+<!--
+<p class="credit"><a href="http://tutorialzine.com/2010/09/google-powered-site-search-ajax-jquery/">Powered by Tzine &amp; Google</a></p>
+ -->   
+
+</body>
+</html>

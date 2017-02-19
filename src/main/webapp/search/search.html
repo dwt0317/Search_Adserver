@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search result</title>
+
+<script src="/DSearchEngine/search/js/jquery-3.1.0.min.js"></script>
+<script src="/DSearchEngine/search/js/jquery.cookie.js"></script>
+<script src="/DSearchEngine/search/js/search_script.js"></script>
+<script src="/DSearchEngine/search/pagination/js/modernizr.js"></script>
+<link rel="stylesheet" type="text/css" href="/DSearchEngine/search/search.css" />
+<link rel="stylesheet" type="text/css" href="/DSearchEngine/search/pagination/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="/DSearchEngine/search/pagination/css/page_style.css" />
+
+
+</head>
+<body>
+
+<div id="page">
+	<div id="content_left" class="content">
+	    <form id="searchForm" method="post">
+			<fieldset>        
+	           	<input id="q" type="text" />           
+	            <input type="button" value="Submit" id="submitButton"/> 
+	        </fieldset>
+	    </form>
+		<div id="text_ad" class="text_ad">
+
+		</div>
+	    <div id="resultsDiv"></div>
+	    <div id="pageNumDiv"> 	    
+			<nav role="navigation">
+				<ul id="paginationContainer" class="cd-pagination no-space">
+
+				</ul>
+			</nav>    
+	    </div>
+	</div>
+	<div id="content_right" class="content">
+	</div>
+</div>
+
+</body>
+
+
+</html>
