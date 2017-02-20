@@ -7,10 +7,10 @@
 ## 系统架构
 ![architecture](https://github.com/dwt0317/Search_Adserver/blob/master/img_folder/architecture.png)
 
-* 灰色部分为待完成部分。
-
 ## 工程架构
 ![framework](https://github.com/dwt0317/Search_Adserver/blob/master/img_folder/framework.png)
+
+* 灰色部分为待完成部分。
 
 ## 模块介绍  
 
