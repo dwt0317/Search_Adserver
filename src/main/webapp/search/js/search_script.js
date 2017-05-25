@@ -22,7 +22,7 @@ $(document).ready(function () {
 	}	
 	//暂时屏蔽搜索结果
 	else{
-//		seid = bingSearch(settings);
+		seid = bingSearch(settings);
 	}
 	
 	if(settings.start==0){   //load ad on first page only

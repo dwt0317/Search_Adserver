@@ -25,9 +25,6 @@ $(document).ready(function(){
 	// Marking the Search tutorialzine.com radio as active:
 	$('#BingSearch').click();	
 	
-	// Marking the web search icon as active:
-	$('li.web').click();
-	
 	// Focusing the input text box:
 	$('#q').focus();
 

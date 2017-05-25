@@ -6,8 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 
 public class IDGenerator {
 	
-
-	
 	public static String generate(){
 		String id = "";
 		id += System.getProperty("user.name");	//用户名（机器名）

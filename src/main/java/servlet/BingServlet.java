@@ -31,16 +31,18 @@ public class BingServlet extends HttpServlet{
 		String count = request.getParameter("count");
 		System.out.println(q+" "+offset+" "+count);	
 		String result = BingSearch.excuteBingSearch(q, count, offset);
-		
-		JSONObject jo = JSONObject.parseObject(result);
 		String seid = "s" + IDGenerator.generate();
-		jo.put("seid", seid);
-		
+		CLogger.searchLog(request, seid);
+		String responseJson = "";
+		if (result != null && !result.equals("")){
+			JSONObject jo = JSONObject.parseObject(result);
+			jo.put("seid", seid);
+			responseJson = jo.toJSONString();
+		}
 		response.setContentType("text/html;charset=utf-8");   //不写这个中文会有乱码
-		response.getWriter().print(jo.toJSONString());
+		response.getWriter().print(responseJson);
 		response.getWriter().flush();
 		
-		CLogger.searchLog(request, seid);
 	}
 	
 	

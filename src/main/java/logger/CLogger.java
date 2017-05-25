@@ -25,9 +25,10 @@ import global.util.WebUtil;
  */
 public class CLogger {
 
-	//t=time, ck=userid, ip=ip, q=q
+	//t=time, u=userid, ip=ip, se=searchid, q=q
 	public static void searchLog(HttpServletRequest request, String seid){
 		String log = commonLog(request);
+		log += "se"+seid;
 	    String q = request.getParameter("q");
 	    log += "q="+q;
 //	    System.out.println(Config.search_log);
@@ -38,7 +39,8 @@ public class CLogger {
 	//t=time, ck=userid, ip=ip, se=searchid, im=impressionid, ad=adid, po=position
 	public static void impressionLog(HttpServletRequest request, JSONObject r){
 		String log = commonLog(request);
-		log += request.getParameter("seid");	//搜索id
+		String seid =  request.getParameter("seid");
+		log += "se=" + request.getParameter("seid") + "&";	//搜索id
 	    Logger impression = Logger.getLogger("impression");		//直接流入hdfs
 	    
 		JSONArray textAds = r.getJSONArray("textAds");
@@ -57,7 +59,7 @@ public class CLogger {
 		}	
 	}
 	
-	//t=time, ck=userid, ip=ip, se=searchid, im=impressionid, ad=adid, po=position, url=url
+	//t=time, u=userid, ip=ip, se=searchid, im=impressionid, ad=adid, po=position, url=url
 	public static void clickLog(HttpServletRequest request){
 		String log = commonLog(request);
 		String ad = request.getParameter("click[ad]");	//use html5 data-click attribute
@@ -87,7 +89,7 @@ public class CLogger {
 		}		
 	    else System.err.println("cookies not found");
 	    String ip = WebUtil.getIp(request);
-	    String log = "t="+time+"&" + "ck="+userid+"&" + "ip="+ip+"&";
+	    String log = "t="+time+"&" + "u="+userid+"&" + "ip="+ip+"&";
 	    return log;
 	}
 }
