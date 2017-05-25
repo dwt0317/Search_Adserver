@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import admanager.entity.Advertisement;
 import admanager.entity.Keyword;
-import database.AdHelper;
+import database.AdDBHelper;
 import elasticsearch.es.ESHandler;
 import global.util.JsonUtil;
 import global.util.ReleaseUtil;
@@ -33,7 +33,7 @@ public class BroadMatcher {
 	
 	public static List<Advertisement> retrieveFromDB(List<Keyword> rewriteQ){		
 		List<String> adIDs = ESHandler.retrieveAdsByKeywords(rewriteQ);		
-		return AdHelper.queryByIds(adIDs);
+		return AdDBHelper.queryByIds(adIDs);
 	}
 	
 }

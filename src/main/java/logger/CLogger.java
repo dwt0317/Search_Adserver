@@ -51,7 +51,7 @@ public class CLogger {
 		}	
 		for (int i = 0; i < imgAds.size(); i++){
 			String ilog = log;
-			JSONObject j = textAds.getJSONObject(i);
+			JSONObject j = imgAds.getJSONObject(i);
 			ilog += "im=" + j.getString("impressionID") + "&" + "ad=" + j.getString("id") + "&" + "po=" + j.getString("position");
 			impression.info(ilog); 
 		}	

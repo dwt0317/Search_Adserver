@@ -61,7 +61,6 @@ public class AdRetrievalHandler {
 			}
 	    }
 	    
-	    
 	    /**
 	     * 建立索引,索引建立好之后,会在elasticsearch-0.20.6\data\elasticsearch\nodes\0 创建索引
 	     * @param indexName  为索引库名，一个es集群中可以有多个索引库。 名称必须为小写
@@ -105,7 +104,6 @@ public class AdRetrievalHandler {
 	               .execute()
 	               .actionGet(); 
 	   	     System.out.println("record num: "+scrollResp.getHits().getTotalHits());
-//         	 System.out.println(scrollResp.getHits().);
          	         
 	       //Scroll until no hits are returned
 	         while (true) {
@@ -139,6 +137,22 @@ public class AdRetrievalHandler {
 			return mapping_json;
 		}
 	    
+		
+	    public void close(){
+	    	this.client.close();
+	    }
+		
+	    //新建ad索引
+	    public void createAdIndex(){
+	         String indexname = "creative";
+	         String type = "keywords";
+	         AdRetrievalHandler esHandler = new AdRetrievalHandler();
+	         DeleteIndexResponse deleteResponse = esHandler.client.admin().indices().delete(new DeleteIndexRequest("creative")).actionGet();
+	         esHandler.createIndexResponse(indexname, type, RetrievalIndexHelper.readIndexInfoAsList());
+	         esHandler.close();
+	    }
+	    
+		//retrieve index json时要注意格式
 	    public static void main(String[] args) {
 	         String indexname = "creative";
 	         String type = "keywords";
@@ -146,17 +160,15 @@ public class AdRetrievalHandler {
 	         DeleteIndexResponse deleteResponse = esHandler.client.admin().indices().delete(new DeleteIndexRequest("creative")).actionGet();
 	         esHandler.createIndexResponse(indexname, type, RetrievalIndexHelper.readIndexInfoAsList());
 	         esHandler.close();
-	         String[] ks = {"耳机","戒指","耳","指","耳麦"};
+	         String[] ks = {"洗衣机","戒指","耳","指","鲜花","鼠标"};
 	         List<Keyword> kl = new ArrayList<Keyword>();
 	         for(String s: ks){
 	        	 kl.add(new Keyword(s,1.0f));
 	         }
 	         JsonUtil.adList2JsonRst(BroadMatcher.retrieveFromDB(kl), kl);
+//	         esHandler.close();
 	    }
 	    
 
-	    
-	    public void close(){
-	    	this.client.close();
-	    }
+
 }

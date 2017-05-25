@@ -12,8 +12,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 import database.DBPool;
 import logger.CLogger;
-import querymanager.rewriting.Similar;
-import querymanager.rewriting.WordSegment;
+import querymanager.rewriting.RewritingHandler;
 
 /**
  * @author dwt
@@ -24,8 +23,7 @@ public class InitListener implements ServletContextListener {
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		WordSegment.getInstance().close();
-		Similar.getInstance().close();
+		RewritingHandler.getInstance().close();
 	}
 
 	@Override
@@ -40,12 +38,11 @@ public class InitListener implements ServletContextListener {
 		InputStream thriftIs = getClass().getClassLoader().getResourceAsStream("properties/thrift.properties");				
 		try {
 			prop.load(thriftIs);	
-			Config.segment_port=Integer.parseInt(prop.getProperty("segment_port"));
-			Config.segment_url=prop.getProperty("segment_url");
-			Config.similar_port=Integer.parseInt(prop.getProperty("similar_port"));
-			Config.similar_url=prop.getProperty("similar_url");
-			WordSegment.getInstance().init(Config.segment_url, Config.segment_port);
-			Similar.getInstance().init(Config.similar_url, Config.similar_port);
+//			Config.rewriting_port=Integer.parseInt(prop.getProperty("rewriting_port"));
+//			Config.rewriting_url=prop.getProperty("rewriting_url");
+			int port = Integer.parseInt(prop.getProperty("rewriting_port"));
+			String url = prop.getProperty("rewriting_url");
+			RewritingHandler.getInstance().init(url, port);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Failed to read thrift properties!");
@@ -57,6 +54,7 @@ public class InitListener implements ServletContextListener {
 	/**
 	 * 初始化数据库配置
 	 */
+	@Deprecated
 	private void initDBService(){
 		Properties prop = new Properties();	
 		InputStream dbIs = getClass().getClassLoader().getResourceAsStream("properties/ad_db.properties");				

@@ -33,37 +33,36 @@ public class BingSearch {
                 .setMaxConnPerRoute(20)
                 .setMaxConnTotal(100)
                 .build();
-
-        try
-        {
-            URIBuilder builder = new URIBuilder("https://api.cognitive.microsoft.com/bing/v5.0/search");
-
-            builder.setParameter("q", q);
-            builder.setParameter("count", count);
-            builder.setParameter("offset", offset);
-            builder.setParameter("mkt", "zh-CN");
-            builder.setParameter("safesearch", "Moderate");
-
-            URI uri = builder.build();
-            HttpGet searchReq = new HttpGet(uri);
-            searchReq.setHeader("Ocp-Apim-Subscription-Key", "295888fae75f437d8157e8b044510d66");
-
-            // Request body
-//            StringEntity reqEntity = new StringEntity("");
-//            request.setEntity(reqEntity);
-
-            HttpResponse searchRes = httpclient.execute(searchReq);
-            HttpEntity entity = searchRes.getEntity();
-
-            if (entity != null) 
-            {
-                result = EntityUtils.toString(entity);
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
+//        try
+//        {
+//            URIBuilder builder = new URIBuilder("https://api.cognitive.microsoft.com/bing/v5.0/search");
+//
+//            builder.setParameter("q", q);
+//            builder.setParameter("count", count);
+//            builder.setParameter("offset", offset);
+//            builder.setParameter("mkt", "zh-CN");
+//            builder.setParameter("safesearch", "Moderate");
+//
+//            URI uri = builder.build();
+//            HttpGet searchReq = new HttpGet(uri);
+//            searchReq.setHeader("Ocp-Apim-Subscription-Key", "295888fae75f437d8157e8b044510d66");
+//
+//            // Request body
+////            StringEntity reqEntity = new StringEntity("");
+////            request.setEntity(reqEntity);
+//
+//            HttpResponse searchRes = httpclient.execute(searchReq);
+//            HttpEntity entity = searchRes.getEntity();
+//
+//            if (entity != null) 
+//            {
+//                result = EntityUtils.toString(entity);
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//        }
 		
 		return result;
 	}

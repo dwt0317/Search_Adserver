@@ -23,7 +23,7 @@ public class ReleaseUtil {
 					+ " &quot;po&quot;:&quot;"+ ad.getPosition() + "&quot;"
 					+ "}\" >";
 			System.out.println(code);
-			code += ad.getCode() + "</div>"; 
+			code += ad.getUrl() + "</div>"; 
 			ad.setCode(code);		
 		}
 	}

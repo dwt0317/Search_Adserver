@@ -19,23 +19,19 @@ public class QueryRewriter {
 	 * @param q
 	 * @return
 	 */
+	
 	public static List<Keyword> broadRW(String q){
-		List<Keyword> rewriteQ = new ArrayList<Keyword>();
-		List<String> qwords = Arrays.asList(WordSegment.getInstance().querySegment(q));
-		//被切分后的原关键词设置评分为1.0
-		for(String qword:qwords){
-			rewriteQ.add(new Keyword(qword, 1.0f));	
-		}
-		String simiRst = Similar.getInstance().similarWords(qwords);
-		if(simiRst != null && !simiRst.equals("")){
-			String[] splits = simiRst.split(",");
+		List<Keyword> rwWordList = new ArrayList<Keyword>();
+		String rewrtingRst = RewritingHandler.getInstance().rewriteQuery(q);
+		if(rewrtingRst != null && !rewrtingRst.equals("")){
+			String[] splits = rewrtingRst.split(" ");
 			if(splits.length!=0){
 				for(String str:splits){
-					String[] keyword = str.split(":");
-					rewriteQ.add(new Keyword(keyword[0],Float.parseFloat(keyword[1])));
+					String[] keyword = str.split(",");
+					rwWordList.add(new Keyword(keyword[0],Float.parseFloat(keyword[1])));
 				}
 			}
 		}
-		return rewriteQ;
+		return rwWordList;
 	}
 }

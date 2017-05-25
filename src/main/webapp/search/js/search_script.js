@@ -20,8 +20,9 @@ $(document).ready(function () {
 	if(settings.se=="ESServlet"){
 		esSearch(settings);
 	}	
+	//暂时屏蔽搜索结果
 	else{
-		seid = bingSearch(settings);
+//		seid = bingSearch(settings);
 	}
 	
 	if(settings.start==0){   //load ad on first page only
@@ -131,7 +132,7 @@ function bingSearch(settings){
 	return seid;
 }
 
-
+// search local repository with Elasticsearch
 function esSearch(settings){
 		var actionURL = '/DSearchEngine/'+settings.se;
 		var resultsDiv = $('#resultsDiv');
@@ -214,9 +215,10 @@ function adSearch(q, seid){
 //now it can't capture open in new tab
 function adClick(e){
     var click = $(this).data('click');
-    alert(click)
+//    alert(click)
     var url = $(this).children("ins").children("a").attr('href');
     var land_url = url.substring(url.indexOf("dest=", 80) + 5);
+    var land_url = "unknown"
     $.ajax({
         url: '/DSearchEngine/ClickServlet',
         type: 'GET',
@@ -224,7 +226,7 @@ function adClick(e){
         contentType: 'application/json; charset=utf-8',
 //        success: function (response) {
 //            alert(response.status);
-//        },
+//        }
 //        error: function () {
 //            alert("error");
 //        }

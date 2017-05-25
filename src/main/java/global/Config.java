@@ -6,8 +6,8 @@ package global;
  */
 public class Config {
 	//thrift config
-	public static String segment_url;
-	public static int segment_port;
+	public static String rewriting_url;
+	public static int rewriting_port;
 	public static String similar_url;
 	public static int similar_port;
 	

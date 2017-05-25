@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import admanager.entity.Advertisement;
-import database.AdHelper;
+import database.AdDBHelper;
 
 /**
  * @author dwt
@@ -19,7 +19,7 @@ public class RetrievalIndexHelper {
 	 */
 	public static List<String> readIndexInfoAsList(){
 		List<String> jsonData = new ArrayList<String>();
-		List<Advertisement> adList = AdHelper.queryForIndex();
+		List<Advertisement> adList = AdDBHelper.queryForIndex();
 		for(Advertisement ad: adList){
 			jsonData.add(JSON.toJSONString(ad));
 		}

@@ -13,7 +13,8 @@ public class Advertisement {
 	private String keyword;
 	private String code;
 	private String id;
-	
+	private String url;
+
 	private String impressionID; //impression id, temporary place
 	private String position;  //ad position
 	
@@ -24,10 +25,10 @@ public class Advertisement {
 	}
 	
 	
-	public Advertisement(String id, String type, List<String> keywords, String code){
+	public Advertisement(String id, String type, List<String> keywords, String url){
 		this.type = type;
 		this.keywords = keywords;
-		this.code = code;
+		this.url = url;
 		this.id = id;
 	}
 	
@@ -98,4 +99,13 @@ public class Advertisement {
 		this.position = position;
 	}
 
+	
+	public String getUrl() {
+		return url;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }
