@@ -28,7 +28,7 @@ public class CLogger {
 	//t=time, u=userid, ip=ip, se=searchid, q=q
 	public static void searchLog(HttpServletRequest request, String seid){
 		String log = commonLog(request);
-		log += "se"+seid;
+		log += "se="+seid+"&";
 	    String q = request.getParameter("q");
 	    log += "q="+q;
 //	    System.out.println(Config.search_log);
@@ -39,7 +39,6 @@ public class CLogger {
 	//t=time, ck=userid, ip=ip, se=searchid, im=impressionid, ad=adid, po=position
 	public static void impressionLog(HttpServletRequest request, JSONObject r){
 		String log = commonLog(request);
-		String seid =  request.getParameter("seid");
 		log += "se=" + request.getParameter("seid") + "&";	//搜索id
 	    Logger impression = Logger.getLogger("impression");		//直接流入hdfs
 	    

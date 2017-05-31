@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 
 import org.apache.log4j.PropertyConfigurator;
 
+import admanager.ranking.AdsRankingHandler;
 import database.DBPool;
 import logger.CLogger;
 import querymanager.rewriting.RewritingHandler;
@@ -40,9 +41,13 @@ public class InitListener implements ServletContextListener {
 			prop.load(thriftIs);	
 //			Config.rewriting_port=Integer.parseInt(prop.getProperty("rewriting_port"));
 //			Config.rewriting_url=prop.getProperty("rewriting_url");
-			int port = Integer.parseInt(prop.getProperty("rewriting_port"));
-			String url = prop.getProperty("rewriting_url");
-			RewritingHandler.getInstance().init(url, port);
+			int rw_port = Integer.parseInt(prop.getProperty("rewriting_port"));
+			String rw_url = prop.getProperty("rewriting_url");
+			RewritingHandler.getInstance().init(rw_url, rw_port);
+			
+			int rk_port = Integer.parseInt(prop.getProperty("ranking_port"));
+			String rk_url = prop.getProperty("ranking_url");
+			AdsRankingHandler.getInstance().init(rk_url, rk_port);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Failed to read thrift properties!");

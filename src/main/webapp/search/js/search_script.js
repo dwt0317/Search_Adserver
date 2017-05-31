@@ -194,7 +194,7 @@ function esSearch(settings){
 
 function adSearch(q, seid){
 	var actionURL = '/DSearchEngine/AdServlet';
-	var adCall = '0:1,10:1'
+	var adCall = 'userid:' + $.cookie('userid')
 	$.getJSON(actionURL,{q:q, seid:seid, adCall:adCall},function(r){
 		var textAds = r.textAds;
 		var imgAds = r.imgAds;

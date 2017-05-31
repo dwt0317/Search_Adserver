@@ -22,14 +22,21 @@ public class BroadMatcher {
 	 * @param q
 	 * @return
 	 */
-	public static JSONObject getSimilarAds(String q){
+//	public static JSONObject getSimilarAds(String q){
+//		List<Keyword> rewriteQ = QueryRewriter.broadRW(q);
+//		List<Advertisement> adList = retrieveFromDB(rewriteQ);
+//		ReleaseUtil.generateImpressionID(adList);
+//		ReleaseUtil.assignPosition(adList);
+//		ReleaseUtil.buildHTMLCode(adList);
+//		return JsonUtil.adList2JsonRst(adList, rewriteQ);
+//	}
+	
+	public static List<Advertisement> getSimilarAds(String q){
 		List<Keyword> rewriteQ = QueryRewriter.broadRW(q);
 		List<Advertisement> adList = retrieveFromDB(rewriteQ);
-		ReleaseUtil.generateImpressionID(adList);
-		ReleaseUtil.assignPosition(adList);
-		ReleaseUtil.buildHTMLCode(adList);
-		return JsonUtil.adList2JsonRst(adList, rewriteQ);
+		return adList;
 	}
+	
 	
 	public static List<Advertisement> retrieveFromDB(List<Keyword> rewriteQ){		
 		List<String> adIDs = ESHandler.retrieveAdsByKeywords(rewriteQ);		

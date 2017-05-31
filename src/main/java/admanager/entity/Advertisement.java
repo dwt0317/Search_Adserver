@@ -18,6 +18,8 @@ public class Advertisement {
 	private String impressionID; //impression id, temporary place
 	private String position;  //ad position
 	
+	private double score;
+	
 	//true means ad is initialized for retrieval indexing
 	public Advertisement(String id, String keyword, boolean index){  
 		this.keyword = keyword;
@@ -107,5 +109,15 @@ public class Advertisement {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+
+	public double getScore() {
+		return score;
+	}
+
+
+	public void setScore(double score) {
+		this.score = score;
 	}
 }
