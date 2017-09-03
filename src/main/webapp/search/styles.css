@@ -16,12 +16,15 @@ body{
 	margin:100px auto 0;
 }
 
-h1{
-	font-family:Corbel,'Myriad Pro',Arial, Helvetica, sans-serif;
-	/*background:url('img/heading.png') no-repeat center top;*/
-	text-indent:-9999px;
-	overflow:hidden;
-	height:90px;
+h1 {
+    font-family: Corbel,'Myriad Pro',Arial, Helvetica, sans-serif;
+    /* background: url(img/heading.png) no-repeat center top; */
+    /* text-indent: -9999px; */
+    /* overflow: hidden; */
+    height: 0px;
+    margin-top: 200px;
+    text-align: center;
+    font-size: xx-large;
 }
 
 #searchForm{

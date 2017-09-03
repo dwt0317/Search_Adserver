@@ -79,16 +79,21 @@ function bingSearch(settings){
 	var resultsDiv = $('#resultsDiv');
 	var seid = "";
 	settings.append = false;
-		
+	
+	var disable = true;
+	if (disable) {
+		resultsDiv.empty();
+		$('<p>',{class:'notFound',html:'Bing API过期，暂不可用。'}).hide().appendTo(resultsDiv).fadeIn();
+		$('#pageNumDiv').hide();
+	}	
+	
 	$.getJSON(actionURL,{q:settings.q,offset:settings.start,count:settings.pageSize},function(r){
 		seid = r.seid;
 		var results = r.webPages.value;
 		var totalEstimatedMatches = r.webPages.totalEstimatedMatches;
-		if(results!=null&&results.length){
-			
+		if(results!=null && results.length){
 			// If results were returned, add them to a pageContainer div,
 			// after which append them to the #resultsDiv:
-			
 			var pageContainer = $('<div>',{className:'pageContainer'});
 //			alert(results.length);
 			for(var i=0;i<results.length;i++){
@@ -123,11 +128,11 @@ function bingSearch(settings){
 		　　　　  ul.appendChild(li);
 			}						
 		}
-		else {
+		else{
 			resultsDiv.empty();
-			$('<p>',{class:'notFound',html:'No Results Were Found!'}).hide().appendTo(resultsDiv).fadeIn();
+			$('<p>',{class:'notFound',html:'Bing API过期，暂不可用。'}).hide().appendTo(resultsDiv).fadeIn();
 			$('#pageNumDiv').hide();
-		}		
+		}
 	});
 	return seid;
 }
