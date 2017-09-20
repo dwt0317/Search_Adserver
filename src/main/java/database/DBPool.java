@@ -60,12 +60,15 @@ public class DBPool {
         }
     }
     
+    /**
+     * Function for unit test
+     */
     public Connection getTestConnection(){
     	Connection conn = null;	  	
     	try {
     		ds = new MariaDbDataSource(); 
-    		ds.setUrl("jdbc:mysql://127.0.0.1/advertising");
-    		ds.setUser("aduser");
+    		ds.setUrl("jdbc:mysql://127.0.0.1:3305/revivedb");
+    		ds.setUser("reviveuser");
     		ds.setPassword("henqiguai");
     		conn = ds.getConnection();
 		} catch (SQLException e) {

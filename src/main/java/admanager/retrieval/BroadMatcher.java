@@ -40,7 +40,7 @@ public class BroadMatcher {
 	
 	public static List<Advertisement> retrieveFromDB(List<Keyword> rewriteQ){		
 		List<String> adIDs = ESHandler.retrieveAdsByKeywords(rewriteQ);		
-		return AdDBHelper.queryByIds(adIDs);
+		return AdDBHelper.queryAdvertisementByIds(adIDs);
 	}
 	
 }

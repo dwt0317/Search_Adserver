@@ -15,16 +15,17 @@ import admanager.entity.Advertisement;
  * 数据库广告检索工具类
  */
 public class AdDBHelper {
-	private static String table = "creative";
+	private static String banner_table = "rv_banners";
+	private static String banner_key = "bannerid";
 	private static int id_index = 1;
-	private static int type_index = 2;
-	private static int keyword_index = 3;
-	private static int url_index = 4;
+	private static String type_column = "contenttype";
+	private static String keyword_column = "keyword";
+	private static String code_column = "invocation_code";
 	
 	public static Advertisement queryById(String id){
 		DBPool pool = DBPool.getInstance();
 		Connection conn = pool.getTestConnection();
-		String sql = "select * from " + table +" where creative_id=\""+id+"\"";
+		String sql = "select * from " + banner_table +" where creative_id=\""+id+"\"";
 		ResultSet rs;
 		Statement st;
 		try {
@@ -42,23 +43,36 @@ public class AdDBHelper {
 	}
 	
 	
-	public static List<Advertisement> queryByIds(List<String> ids){
+	/**
+	 * Query advertisement info by list of ad ids.
+	 * @param ids
+	 * @return
+	 */
+	public static List<Advertisement> queryAdvertisementByIds(List<String> ids){
 		DBPool pool = DBPool.getInstance();
 		Connection conn = pool.getTestConnection();
 		ResultSet rs;
 		Statement st;
 		List<Advertisement> adList = new ArrayList<Advertisement>();	
 		for(String id: ids){
-			String sql = "select * from " + table +" where creative_id=\""+id+"\"";
+//			String sql = "select * from " + banner_table +" where "+banner_key+"=\""+id+"\"";
+			String sql = 
+					"SELECT rv_banners.bannerid, rv_banners.contenttype, rv_banners.keyword,  rv_invocation_code.invocation_code "
+					+ "FROM rv_banners "	
+					+ "INNER JOIN rv_invocation_code "
+					+ "ON rv_banners.bannerid = rv_invocation_code.bannerid "
+					+ "WHERE rv_banners.bannerid=" + id+ " ";
 			try {
 				 st = conn.prepareStatement(sql);
 				 rs = st.executeQuery(sql);
 	            while (rs.next()){
+	            	String type = rs.getString(type_column);
+	            	type = !type.equals("txt") ? "img" : type;
 	            	adList.add(new Advertisement(
 	            			rs.getString(id_index), 
-	            			rs.getString(type_index),
-	            			Arrays.asList(rs.getString(keyword_index).split(",")),
-	            			rs.getString(url_index))
+	            			type,
+	            			Arrays.asList(rs.getString(keyword_column).split(",")),
+	            			rs.getString(code_column))
 	            	);
 	            }
 				 
@@ -80,19 +94,22 @@ public class AdDBHelper {
 		Connection conn = pool.getTestConnection();
 		ResultSet rs;
 		Statement st;
-		String sql = "SELECT * FROM creative";
+		String sql = 
+				"SELECT rv_banners.bannerid, rv_banners.contenttype, rv_banners.keyword,  rv_invocation_code.invocation_code "
+				+ "FROM rv_banners "	
+				+ "INNER JOIN rv_invocation_code "
+				+ "ON rv_banners.bannerid = rv_invocation_code.bannerid ";
 		try {
 			 st = conn.prepareStatement(sql);
 			 rs = st.executeQuery(sql);
 			 System.out.println(sql);
            while (rs.next()){
-        	 //column从1开始计数 ，一个keyword一个实体
-        	   for(String keyword: rs.getString(keyword_index).split(",")){
+        	   //column从1开始计数 ，一个keyword一个实体
+        	   for(String keyword: rs.getString(keyword_column).split(" ")){
         		   adList.add(new Advertisement(rs.getString(1), keyword, true));    
         	   }   	   
            }			 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return adList;

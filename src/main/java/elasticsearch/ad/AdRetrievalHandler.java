@@ -46,7 +46,7 @@ public class AdRetrievalHandler {
 	 private Client client;
 	    public AdRetrievalHandler(){    
 	        //使用本机做为节点
-	        this("localhost");
+	        this("127.0.0.1");
 	    }
 	    
 	    public AdRetrievalHandler(String host){
@@ -121,6 +121,7 @@ public class AdRetrievalHandler {
 	     }
 	    
 	    
+	    
 		private String readMappingFile(){
 			String mapping_json = "";
 			InputStream input = getClass().getResourceAsStream("/es/mappings");
@@ -142,31 +143,32 @@ public class AdRetrievalHandler {
 	    	this.client.close();
 	    }
 		
-	    //新建ad索引
-	    public void createAdIndex(){
+	    /**
+	     * 删除并重建索引
+	     */
+	    public static void reconstructIndex(){
 	         String indexname = "creative";
 	         String type = "keywords";
 	         AdRetrievalHandler esHandler = new AdRetrievalHandler();
 	         DeleteIndexResponse deleteResponse = esHandler.client.admin().indices().delete(new DeleteIndexRequest("creative")).actionGet();
+	         System.out.println(deleteResponse);
 	         esHandler.createIndexResponse(indexname, type, RetrievalIndexHelper.readIndexInfoAsList());
 	         esHandler.close();
 	    }
 	    
+	    
+	    
+	    
 		//retrieve index json时要注意格式
 	    public static void main(String[] args) {
-	         String indexname = "creative";
-	         String type = "keywords";
-	         AdRetrievalHandler esHandler = new AdRetrievalHandler();
-	         DeleteIndexResponse deleteResponse = esHandler.client.admin().indices().delete(new DeleteIndexRequest("creative")).actionGet();
-	         esHandler.createIndexResponse(indexname, type, RetrievalIndexHelper.readIndexInfoAsList());
-	         esHandler.close();
-	         String[] ks = {"洗衣机","戒指","耳","指","鲜花","鼠标"};
-	         List<Keyword> kl = new ArrayList<Keyword>();
-	         for(String s: ks){
-	        	 kl.add(new Keyword(s,1.0f));
-	         }
-	         JsonUtil.adList2JsonRst(BroadMatcher.retrieveFromDB(kl), kl);
-//	         esHandler.close();
+//			 reconstructIndex();
+			 String[] ks = {"洗衣机","玫瑰","花","指","鲜花","鼠标"};
+			 List<Keyword> kl = new ArrayList<Keyword>();
+			 for(String s: ks){
+				 kl.add(new Keyword(s,1.0f));
+			 }
+			 JsonUtil.adList2JsonRst(BroadMatcher.retrieveFromDB(kl), kl);
+			//esHandler.close();
 	    }
 	    
 
