@@ -9,7 +9,7 @@ import admanager.entity.Keyword;
 import database.AdDBHelper;
 import elasticsearch.es.ESHandler;
 import global.util.JsonUtil;
-import global.util.ReleaseUtil;
+import global.util.DeliverUtil;
 import global.util.WebUtil;
 import querymanager.rewriting.QueryRewriter;
 
@@ -25,9 +25,9 @@ public class BroadMatcher {
 //	public static JSONObject getSimilarAds(String q){
 //		List<Keyword> rewriteQ = QueryRewriter.broadRW(q);
 //		List<Advertisement> adList = retrieveFromDB(rewriteQ);
-//		ReleaseUtil.generateImpressionID(adList);
-//		ReleaseUtil.assignPosition(adList);
-//		ReleaseUtil.buildHTMLCode(adList);
+//		DeliverUtil.generateImpressionID(adList);
+//		DeliverUtil.assignPosition(adList);
+//		DeliverUtil.buildHTMLCode(adList);
 //		return JsonUtil.adList2JsonRst(adList, rewriteQ);
 //	}
 	

@@ -59,8 +59,11 @@ public class JsonUtil {
 		List<Advertisement> textAds = new ArrayList<Advertisement>();
 		List<Advertisement> imgAds = new ArrayList<Advertisement>();
 		for(Advertisement ad: adList){
-			if(ad.getType().equals("img")) 
-				imgAds.add(ad);			
+			
+			if(ad.getType().equals("img")) {
+				System.out.println(ad.toString());
+				imgAds.add(ad);	
+			}		
 			else
 				textAds.add(ad);			
 		}

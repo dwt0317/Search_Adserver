@@ -8,9 +8,9 @@ import usermanager.IDGenerator;
 
 /**
  * @author dwt
- * 广告投放前处理
+ * 广告投放前处理工具类
  */
-public class ReleaseUtil {
+public class DeliverUtil {
 	/**
 	 * 将创意、impression id和位置信息写入html
 	 */

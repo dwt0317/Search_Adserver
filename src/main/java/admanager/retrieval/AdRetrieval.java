@@ -11,7 +11,7 @@ import admanager.entity.Advertisement;
 import admanager.entity.Keyword;
 import admanager.ranking.AdsRanker;
 import global.util.JsonUtil;
-import global.util.ReleaseUtil;
+import global.util.DeliverUtil;
 import querymanager.rewriting.QueryRewriter;
 
 
@@ -56,9 +56,9 @@ public class AdRetrieval {
 			rankedAds.add(pq.peek());
 			pq.poll();
 		}
-		ReleaseUtil.generateImpressionID(rankedAds);
-		ReleaseUtil.assignPosition(rankedAds);
-		ReleaseUtil.buildHTMLCode(rankedAds);
+		DeliverUtil.generateImpressionID(rankedAds);
+		DeliverUtil.assignPosition(rankedAds);
+		DeliverUtil.buildHTMLCode(rankedAds);
 		return JsonUtil.adList2JsonRst(rankedAds, rewriteQ);
 	}	
 

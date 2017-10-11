@@ -33,7 +33,7 @@ public class InitListener implements ServletContextListener {
 		initLogger();
 	}
 	
-	//初始化thrift服务（连接的服务包括分词，查询改写）
+	//初始化thrift服务（连接的服务包括查询改写,广告排序）
 	private void initThriftService(){
 		Properties prop = new Properties();	
 		InputStream thriftIs = getClass().getClassLoader().getResourceAsStream("properties/thrift.properties");				

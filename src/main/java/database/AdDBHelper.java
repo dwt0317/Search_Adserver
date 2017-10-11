@@ -67,7 +67,7 @@ public class AdDBHelper {
 				 rs = st.executeQuery(sql);
 	            while (rs.next()){
 	            	String type = rs.getString(type_column);
-	            	type = !type.equals("txt") ? "img" : type;
+	            	type = (!type.equals("txt")) ? "img" : type;
 	            	adList.add(new Advertisement(
 	            			rs.getString(id_index), 
 	            			type,

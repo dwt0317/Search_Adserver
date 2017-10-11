@@ -161,7 +161,7 @@ public class AdRetrievalHandler {
 	    
 		//retrieve index json时要注意格式
 	    public static void main(String[] args) {
-//			 reconstructIndex();
+			 reconstructIndex();
 			 String[] ks = {"洗衣机","玫瑰","花","指","鲜花","鼠标"};
 			 List<Keyword> kl = new ArrayList<Keyword>();
 			 for(String s: ks){

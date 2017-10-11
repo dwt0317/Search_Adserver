@@ -10,8 +10,9 @@ public class AdsRanker {
 		String userid = adCall.split(",")[0].split(":")[1];
 		for (Advertisement ad: adList){
 			String ad_query = userid+"&"+ad.getId()+"&"+"0";
-			double score = AdsRankingHandler.getInstance().ranking(ad_query);
-			ad.setScore(score);
+//			double score = AdsRankingHandler.getInstance().ranking(ad_query);
+//			ad.setScore(score);
+			ad.setScore(.5);
 		}
 	}
 }
