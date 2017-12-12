@@ -80,7 +80,7 @@ function bingSearch(settings){
 	var seid = "";
 	settings.append = false;
 	
-	var disable = true;
+	var disable = false;
 	if (disable) {
 		resultsDiv.empty();
 		$('<p>',{class:'notFound',html:'Bing API过期，暂不可用。'}).hide().appendTo(resultsDiv).fadeIn();
@@ -89,8 +89,8 @@ function bingSearch(settings){
 	
 	$.getJSON(actionURL,{q:settings.q,offset:settings.start,count:settings.pageSize},function(r){
 		seid = r.seid;
-		var results = r.webPages.value;
-		var totalEstimatedMatches = r.webPages.totalEstimatedMatches;
+		var results = r.value;
+		var totalEstimatedMatches = r.totalEstimatedMatches;
 		if(results!=null && results.length){
 			// If results were returned, add them to a pageContainer div,
 			// after which append them to the #resultsDiv:
@@ -130,7 +130,7 @@ function bingSearch(settings){
 		}
 		else{
 			resultsDiv.empty();
-			$('<p>',{class:'notFound',html:'Bing API过期，暂不可用。'}).hide().appendTo(resultsDiv).fadeIn();
+			$('<p>',{class:'notFound',html:'未找到相关搜索结果。'}).hide().appendTo(resultsDiv).fadeIn();
 			$('#pageNumDiv').hide();
 		}
 	});
@@ -284,7 +284,7 @@ function bingResult(r){
 	arr = [
 			'<div class="webResult">',
 			'<h2><a href="',r.url,'" target="_blank">',r.name,'</a></h2>',
-			'<p>',r.snippet,'</p>',
+			'<p>',r.description,'</p>',
 			'</div>'
 		];
 	// The toString method.

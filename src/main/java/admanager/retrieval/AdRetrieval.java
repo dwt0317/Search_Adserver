@@ -45,17 +45,26 @@ public class AdRetrieval {
             }  
         };
         
-        PriorityQueue<Advertisement> pq = new PriorityQueue<Advertisement>(3, rankCompare);
+        PriorityQueue<Advertisement> imgpq = new PriorityQueue<Advertisement>(1, rankCompare);
+        PriorityQueue<Advertisement> txtpq = new PriorityQueue<Advertisement>(1, rankCompare);
         for (Advertisement ad: adList){
-        	pq.offer(ad);
+        	if (ad.getType() == "img")
+        		imgpq.offer(ad);
+        	else txtpq.offer(ad);
         }
         
 		List<Advertisement> rankedAds = new ArrayList<Advertisement>();
-		for (int i = 0; i < 3 && !pq.isEmpty(); i++){
-			System.out.println(pq.peek().getId()+": "+pq.peek().getScore());
-			rankedAds.add(pq.peek());
-			pq.poll();
+		for (int i = 0; i < 1 && !imgpq.isEmpty(); i++){
+			System.out.println(imgpq.peek().getId()+": "+imgpq.peek().getScore());
+			rankedAds.add(imgpq.peek());
+			imgpq.poll();
 		}
+		for (int i = 0; i < 1 && !txtpq.isEmpty(); i++){
+			System.out.println(txtpq.peek().getId()+": "+txtpq.peek().getScore());
+			rankedAds.add(txtpq.peek());
+			txtpq.poll();
+		}
+		
 		DeliverUtil.generateImpressionID(rankedAds);
 		DeliverUtil.assignPosition(rankedAds);
 		DeliverUtil.buildHTMLCode(rankedAds);

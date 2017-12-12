@@ -34,7 +34,7 @@ public class BingServlet extends HttpServlet{
 		String seid = "s" + IDGenerator.generate();
 		CLogger.searchLog(request, seid);
 		String responseJson = "";
-		//没有bing的api暂不提供
+
 		if (result != null && !result.equals("")){
 			JSONObject jo = JSONObject.parseObject(result);
 			jo.put("seid", seid);
