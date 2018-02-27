@@ -17,8 +17,12 @@ public class Advertisement {
 
 	private String impressionID; //impression id, temporary place
 	private String position;  //ad position
+	private String clientid;
+	private String campaignid;
 	
 	private double score;
+	private double price;
+	private double balance;
 	
 	//true means ad is initialized for retrieval indexing
 	public Advertisement(String id, String keyword, boolean index){  
@@ -43,6 +47,52 @@ public class Advertisement {
 		this.code = code;
 		this.keywords = new ArrayList<String>();
 	}
+	
+	//for test use
+	public Advertisement(String clientid,  double price){
+		this.clientid = clientid;
+		this.price = price;
+	}
+	
+	public double getBalance() {
+		return balance;
+	}
+
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+
+	public String getClientid() {
+		return clientid;
+	}
+
+
+	public void setClientid(String clientid) {
+		this.clientid = clientid;
+	}
+
+
+	public String getCampaignid() {
+		return campaignid;
+	}
+
+
+	public void setCampaignid(String campaignid) {
+		this.campaignid = campaignid;
+	}
+
+
+	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	
 	public String getId() {
 		return id;

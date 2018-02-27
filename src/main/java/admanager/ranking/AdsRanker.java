@@ -2,7 +2,9 @@ package admanager.ranking;
 
 import java.util.List;
 
+import admanager.budget.BudgetManager;
 import admanager.entity.Advertisement;
+import database.AdDBHelper;
 
 public class AdsRanker {
 
@@ -14,5 +16,13 @@ public class AdsRanker {
 //			ad.setScore(score);
 			ad.setScore(.5);
 		}
+	}
+	
+
+	
+	public static void main(String[] args){
+		
+		
+		return;
 	}
 }

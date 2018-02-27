@@ -7,6 +7,7 @@ import java.util.PriorityQueue;
 
 import com.alibaba.fastjson.JSONObject;
 
+import admanager.budget.BudgetManager;
 import admanager.entity.Advertisement;
 import admanager.entity.Keyword;
 import admanager.ranking.AdsRanker;
@@ -24,10 +25,13 @@ public class AdRetrieval {
 		//now default is broad match	
 //		List<Advertisement> adList = BroadMatcher.getSimilarAds(q);
 		List<Keyword> rewriteQ = QueryRewriter.broadRW(q);
-		List<Advertisement> adList = BroadMatcher.retrieveFromDB(rewriteQ);
+		List<Advertisement> candiAds = BroadMatcher.retrieveFromDB(rewriteQ);
+		
+		//remove those ads which don't have enough money
+		BudgetManager.queryBudgetStatus(candiAds);
 		
 		//ranking ads
-		AdsRanker.rankingAds(adList, adCall);
+		AdsRanker.rankingAds(candiAds, adCall);
         Comparator<Advertisement> rankCompare =  new Comparator<Advertisement>(){  
             public int compare(Advertisement o1, Advertisement o2) {  
                 // TODO Auto-generated method stub  
@@ -47,7 +51,7 @@ public class AdRetrieval {
         
         PriorityQueue<Advertisement> imgpq = new PriorityQueue<Advertisement>(1, rankCompare);
         PriorityQueue<Advertisement> txtpq = new PriorityQueue<Advertisement>(1, rankCompare);
-        for (Advertisement ad: adList){
+        for (Advertisement ad: candiAds){
         	if (ad.getType() == "img")
         		imgpq.offer(ad);
         	else txtpq.offer(ad);
@@ -56,14 +60,20 @@ public class AdRetrieval {
 		List<Advertisement> rankedAds = new ArrayList<Advertisement>();
 		for (int i = 0; i < 1 && !imgpq.isEmpty(); i++){
 			System.out.println(imgpq.peek().getId()+": "+imgpq.peek().getScore());
-			rankedAds.add(imgpq.peek());
+			if (imgpq.peek().getScore() != 0){
+				rankedAds.add(imgpq.peek());
+			}
 			imgpq.poll();
 		}
 		for (int i = 0; i < 1 && !txtpq.isEmpty(); i++){
 			System.out.println(txtpq.peek().getId()+": "+txtpq.peek().getScore());
-			rankedAds.add(txtpq.peek());
+			if (txtpq.peek().getScore() != 0){
+				rankedAds.add(txtpq.peek());
+			}
 			txtpq.poll();
 		}
+		
+		BudgetManager.charge(rankedAds);
 		
 		DeliverUtil.generateImpressionID(rankedAds);
 		DeliverUtil.assignPosition(rankedAds);
